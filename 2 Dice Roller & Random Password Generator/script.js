@@ -34,3 +34,49 @@
 */
 
 // WRITE YOUR CODE BELOW:
+// PART 1: Dice Roller
+
+const rollButton = document.getElementById("rollButton");
+const diceResult = document.getElementById("diceResult");
+
+rollButton.addEventListener("click", function () {
+    const diceRoll = Math.floor(Math.random() * 6) + 1;
+    diceResult.textContent = "You rolled: " + diceRoll;
+});
+
+
+// PART 2: Random Password Generator
+
+const passwordLength = document.getElementById("passwordLength");
+const includeNumbers = document.getElementById("includeNumbers");
+const includeSymbols = document.getElementById("includeSymbols");
+const generateButton = document.getElementById("generateButton");
+const passwordResult = document.getElementById("passwordResult");
+
+generateButton.addEventListener("click", function () {
+    const length = Number(passwordLength.value);
+
+    let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+    if (includeNumbers.checked) {
+        characters += "0123456789";
+    }
+
+    if (includeSymbols.checked) {
+        characters += "!@#$%^&*()_+-=[]{}|;:,.<>?";
+    }
+
+    if (length <= 0) {
+        passwordResult.textContent = "Please enter a valid password length.";
+        return;
+    }
+
+    let password = "";
+
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        password += characters[randomIndex];
+    }
+
+    passwordResult.textContent = password;
+});

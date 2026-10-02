@@ -21,3 +21,70 @@
             - Append the new `<li>` to the task list (`<ul>`).
             - Clear the text in the input field.
 */
+
+// Task Tracker
+
+const taskInput = document.getElementById("taskInput");
+const dueDate = document.getElementById("dueDate");
+const addButton = document.getElementById("addButton");
+const taskList = document.getElementById("taskList");
+
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+function saveTasks() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function displayTasks() {
+    taskList.innerHTML = "";
+
+    tasks.forEach(function (task, index) {
+        const taskElement = document.createElement("div");
+        taskElement.className = "task";
+
+        taskElement.innerHTML = `
+            <div class="task-info">
+                <p class="task-name">${task.name}</p>
+                <p class="task-date">Due: ${task.date || "No due date"}</p>
+            </div>
+
+            <button class="delete-button" onclick="deleteTask(${index})">
+                Delete
+            </button>
+        `;
+
+        taskList.appendChild(taskElement);
+    });
+}
+
+function addTask() {
+    const name = taskInput.value.trim();
+
+    if (name === "") {
+        return;
+    }
+
+    const task = {
+        name: name,
+        date: dueDate.value
+    };
+
+    tasks.push(task);
+
+    saveTasks();
+    displayTasks();
+
+    taskInput.value = "";
+    dueDate.value = "";
+}
+
+function deleteTask(index) {
+    tasks.splice(index, 1);
+
+    saveTasks();
+    displayTasks();
+}
+
+addButton.addEventListener("click", addTask);
+
+displayTasks();

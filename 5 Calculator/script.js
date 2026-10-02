@@ -25,3 +25,39 @@
 */
 
 // WRITE YOUR CODE BELOW:
+// SETUP
+
+const display = document.getElementById("display");
+const buttons = document.querySelectorAll("button");
+
+
+// APPEND FUNCTION
+
+function appendToDisplay(input) {
+    display.value += input;
+}
+
+
+// CLEAR FUNCTION
+
+function clearDisplay() {
+    display.value = "";
+}
+
+
+// CALCULATE FUNCTION
+
+function calculate() {
+    try {
+        let expression = display.value;
+
+        expression = expression.replaceAll("×", "*");
+        expression = expression.replaceAll("÷", "/");
+        expression = expression.replaceAll("−", "-");
+
+        display.value = eval(expression);
+    }
+    catch (error) {
+        display.value = "Error";
+    }
+}

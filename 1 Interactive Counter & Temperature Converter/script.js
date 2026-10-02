@@ -39,3 +39,51 @@
 */
 
 // WRITE YOUR CODE BELOW:
+// PART 1: Number Counter
+
+let count = 0;
+
+const countDisplay = document.getElementById("count");
+const increaseButton = document.getElementById("increase");
+const decreaseButton = document.getElementById("decrease");
+const resetButton = document.getElementById("reset");
+
+increaseButton.addEventListener("click", function () {
+    count++;
+    countDisplay.textContent = count;
+});
+
+decreaseButton.addEventListener("click", function () {
+    count--;
+    countDisplay.textContent = count;
+});
+
+resetButton.addEventListener("click", function () {
+    count = 0;
+    countDisplay.textContent = count;
+});
+
+
+// PART 2: Temperature Converter
+
+const temperatureInput = document.getElementById("temperature");
+const toFahrenheit = document.getElementById("toFahrenheit");
+const toCelsius = document.getElementById("toCelsius");
+const submitButton = document.getElementById("submit");
+const result = document.getElementById("result");
+
+submitButton.addEventListener("click", function () {
+    const temp = Number(temperatureInput.value);
+
+    if (toFahrenheit.checked) {
+        const fahrenheit = (temp * 9 / 5) + 32;
+        result.textContent = fahrenheit.toFixed(1) + " °F";
+    }
+    else if (toCelsius.checked) {
+        const celsius = (temp - 32) * (5 / 9);
+        result.textContent = celsius.toFixed(1) + " °C";
+    }
+    else {
+        result.textContent = "Please select a unit.";
+    }
+});
